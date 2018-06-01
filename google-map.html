@@ -20,12 +20,12 @@
 
 <body>
     <h1>Trip Mapper</h1>
-    <!-- <div class="grid-container">
+    <div class="grid-container">
         <div class="grid-item">
             <div class="editable-textbox" contenteditable="true" id="textTarget">Enter some text here</div>
             <textarea rows="12" cols="50" id = "textTarget"></textarea>
         </div>
-        <div class="grid-item"> -->
+        <div class="grid-item">
             <div id="googleMap1" style="width:100%;height:400px;"></div>
         </div>
     </div>
@@ -50,8 +50,8 @@
             CreateLine2(map);
 
             google.maps.event.addListener(map, 'click', function (event) {
-                CreateMarker(map, event.latLng);
-                //AddTextSection(map, event.latLng);
+                //CreateMarker(map, event.latLng);
+                AddTextSection(map, event.latLng);
 
             })
 
@@ -114,8 +114,8 @@
         }
         function AddTextSection(map, latLng) {
 
-            // textTarget.innerHTML = textTarget.innerHTML.substring(0,textTarget.selectionStart) + 
-            //                     latLng.lat().toFixed(5) + textTarget.innerHTML.substring(textTarget.selectionEnd,textTarget.length-1);
+             textTarget.innerHTML = textTarget.innerHTML.substring(0,textTarget.selectionStart) + 
+                                 latLng.lat().toFixed(5) + textTarget.innerHTML.substring(textTarget.selectionEnd,textTarget.length-1);
 
         }
 
