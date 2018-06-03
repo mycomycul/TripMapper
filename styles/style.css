@@ -1,0 +1,11 @@
+        .grid-container {
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+
+        .editable-textbox {
+            border: 1px solid black;
+            width: auto;
+            margin: 10px;
+            height: 400px;
+        }

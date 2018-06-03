@@ -3,27 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <style>
-        .grid-container {
-            display: grid;
-            grid-template-columns: 50% 50%;
-        }
-
-        .editable-textbox {
-            border: 1px solid black;
-            width: auto;
-            margin: 10px;
-            height: 400px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/style.css">    
 </head>
 
 <body>
     <h1>Trip Mapper</h1>
     <div class="grid-container">
         <div class="grid-item">
-            <div class="editable-textbox" contenteditable="true" id="textTarget">Enter some text here</div>
-            <textarea rows="12" cols="50" id = "textTarget"></textarea>
+            <div class="editable-textbox" contenteditable="true" id="textTarget" onfocusout="saveSelection(this)">Enter some <strong>good </strong>text here
+            </div>
+            <textarea rows="12" cols="50" id = "textSample"></textarea>
         </div>
         <div class="grid-item">
             <div id="googleMap1" style="width:100%;height:400px;"></div>
@@ -33,7 +22,6 @@
 
 
     <script>
-
         function myMap() {
             //Map target, zoom and center required            
             var mapCanvas = document.getElementById('googleMap1');
@@ -120,7 +108,7 @@
         }
 
     </script>
-
+    <script src="scripts/text.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDolGuNslClF0NwUTIS4HPRCwLeJJBz6OI&callback=myMap"
         type="text/javascript"></script>
 </body>
