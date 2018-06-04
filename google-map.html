@@ -3,22 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style.css">    
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
     <h1>Trip Mapper</h1>
     <div class="grid-container">
         <div class="grid-item">
-            <div class="editable-textbox" contenteditable="true" id="textTarget" onfocusout="saveSelection(this)">Enter some <strong>good </strong>text here
+            <textarea rows="10" cols="50" id = "textSample"></textarea>
+            <div id="textTarget" >
+                Enter <i><strong>some</i> good </strong>text here
             </div>
-            <textarea rows="12" cols="50" id = "textSample"></textarea>
+            
         </div>
         <div class="grid-item">
+            <div id="textToHTML"></div>
+            </br>
             <div id="googleMap1" style="width:100%;height:400px;"></div>
         </div>
     </div>
-
+    
+    
 
 
     <script>
@@ -109,6 +116,10 @@
 
     </script>
     <script src="scripts/text.js"></script>
+    
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="scripts/quill.js" type="text/javascript"></script>
+    
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDolGuNslClF0NwUTIS4HPRCwLeJJBz6OI&callback=myMap"
         type="text/javascript"></script>
 </body>
