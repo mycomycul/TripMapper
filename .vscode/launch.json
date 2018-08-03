@@ -5,13 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch test",
+            "program": "${workspaceFolder}/scripts/test.js"
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "file": "${workspaceFolder}/google-map.html"
         },
         {
-            "type":"chrome",
+            "type": "chrome",
             "request": "launch",
             "name": "Launch Quill",
             "file": "${workspaceFolder}/Quill.html"
