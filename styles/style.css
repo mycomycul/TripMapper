@@ -1,4 +1,4 @@
-        .grid-container {
+        /* .grid-container {
             display: grid;
             grid-template-columns: 50% 50%;
         }
@@ -8,4 +8,52 @@
             width: auto;
             margin: 10px;
             height: 400px;
+        } */
+
+         /* .grid-container {
+            display: grid;
+            grid-column-gap: 10px;
+            grid-template-columns: auto 60px;
+            background-color: #DDDDDD;
+            padding: 10px;
         }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+
+        }
+
+        input {
+            position: relative;
+            top: 35%
+        } */
+
+        
+/*Quill Column Formatting*/
+*{
+    box-sizing: border-box;    
+}
+[class$="column"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid red;
+}
+.row {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.text-column{
+    width: 80%;
+    display: table-cell;
+    position:relative;
+}
+.button-column{
+    width:20%;
+    display: flex;
+    align-items:center;
+}
