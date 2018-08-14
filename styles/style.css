@@ -38,8 +38,11 @@
 }
 [class$="column"] {
     float: left;
-    padding: 15px;
     border: 1px solid red;
+    align-items:center;
+}
+.ql-editor{
+    height:calc(100% - 2 * 5px);
 }
 .row {
     display: flex;
@@ -51,9 +54,24 @@
     width: 80%;
     display: table-cell;
     position:relative;
+    padding:5px;
 }
 .button-column{
     width:20%;
+    display: flex;
+    align-items:center;
+    margin:auto;
+}
+@media only screen and (min-width:968px){
+    .text-column{
+        width: 90%;
+    }
+    .button-column{
+        width:10%;
+    }
+}
+.newSection-button-row{
+    /* margin:auto; */
     display: flex;
     align-items:center;
 }

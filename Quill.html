@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    
+
     <script src="scripts/jquery-3.3.1.min.js"></script>
 </head>
 
@@ -14,18 +14,27 @@
     <h1>Trip Mapper</h1>
     <div class="row">
         <section class="text-column">
-            <div id="QuillTarget">
-                Enter
-                <i>
-                    <strong>some</i> good </strong>text here
+            <div class="quillcontainer">
+                <div id="QuillTarget">
+                    Enter
+                    <i>
+                        <strong>some</i> good </strong>text here
                 </div>
+            </div>
         </section>
         <div class="button-column">
-            <input type="button" onclick="newSection()" value="New Section">
+            <div style="margin:auto;">
+                <input style="display: inline;" class="inline-button" type="button" onclick="newSection()" value="Edit">
+                <input style="display: inline;" type="button" class="inline-button" onclick="newSection()" value="X">
+            </div>
 
         </div>
     </div>
-
+    <div class="row">
+        <div class="newSection-button-row text-column">
+            <input style="margin:auto;" type="button" class="inline-button" onclick="newSection()" value="New Section">
+        </div>
+    </div>
 
 
 
