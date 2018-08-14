@@ -12,9 +12,10 @@
 
 <body>
     <h1>Trip Mapper</h1>
-    <div class="row">
+    
+    <div class="row" >
         <section class="text-column">
-            <div class="quillcontainer">
+            <div id="quillcontainer" class="quillcontainer">
                 <div id="QuillTarget">
                     Enter
                     <i>
@@ -24,15 +25,14 @@
         </section>
         <div class="button-column">
             <div style="margin:auto;">
-                <input style="display: inline;" class="inline-button" type="button" onclick="newSection()" value="Edit">
-                <input style="display: inline;" type="button" class="inline-button" onclick="newSection()" value="X">
+                <input type="button" onclick="" value="Edit">
+                <input type="button" onclick="" value="X">
             </div>
-
         </div>
     </div>
     <div class="row">
         <div class="newSection-button-row text-column">
-            <input style="margin:auto;" type="button" class="inline-button" onclick="newSection()" value="New Section">
+            <input style="margin:auto;" type="button" onclick="addNewSection()" value="New Section">
         </div>
     </div>
 
