@@ -1,3 +1,5 @@
+// swap set attribute with .className
+
 
 var options = {
     debug: 'info',

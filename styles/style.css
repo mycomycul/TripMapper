@@ -33,9 +33,13 @@
 
         
 /*Quill Column Formatting*/
-body{
+.darkmode{
     background-color: black;
     color:gray;
+}
+.lightmode{
+    background-color: gray;
+    color:black;
 }
 *{
     box-sizing: border-box;    
