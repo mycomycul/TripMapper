@@ -33,6 +33,10 @@
 
         
 /*Quill Column Formatting*/
+body{
+    background-color: black;
+    color:gray;
+}
 *{
     box-sizing: border-box;    
 }
@@ -60,7 +64,7 @@
     width:20%;
     display: flex;
     align-items:center;
-    margin:auto;
+
 }
 @media only screen and (min-width:968px){
     .text-column{
@@ -71,7 +75,9 @@
     }
 }
 .newSection-button-row{
-    /* margin:auto; */
     display: flex;
     align-items:center;
+}
+.ctr{
+    margin:auto;
 }
