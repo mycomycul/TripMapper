@@ -8,6 +8,8 @@ var options = {
 }
 //do this in document ready function so that editor is local and can be reused
 $(document).ready(function(){
+let newRow = CreateRow(RandomId(5));
+document.body.insertBefore(newRow,document.body.childNodes[4]);
 let editor = new Quill('#QuillTarget', options);
 })
 
@@ -21,14 +23,24 @@ function addNewSection() {
         element.removeChild(element.lastChild);
     }
     
-    element.setAttribute("id", Math.floor(Math.random()*10000));
+    var newSectionId = RandomId(5);
+    element.setAttribute("id", newSectionId);
     element.innerHTML = quillContents;
-    //Create new quill section
+
+    var NewRow = CreateRow(newSectionId);
+
+    var rows = document.getElementsByClassName('row');
+    rows[0].parentNode.insertBefore(NewRow, rows[rows.length - 1]);
+    let editor = new Quill('#QuillTarget', options);
+    console.log("");
+}
+function CreateRow(newSectionId){
     var NewRow = document.createElement("div");
     NewRow.className="row";
 
     var newTextColumn = document.createElement('section');
     newTextColumn.className="text-column";
+    newTextColumn.id=newSectionId;
     
     var newQuillContainer = document.createElement("div");
     newQuillContainer.className= "quillcontainer";
@@ -46,6 +58,7 @@ function addNewSection() {
     var newButton1 = document.createElement("input");
     newButton1.setAttribute("type","button");
     newButton1.setAttribute("value","Edit");
+    newButton1.setAttribute("id",("edit-" + newSectionId));
 
     var newButton2 = document.createElement("input");
     newButton2.setAttribute("type","button");
@@ -61,10 +74,7 @@ function addNewSection() {
     NewRow.appendChild (newTextColumn);
     NewRow.appendChild(newButtonColumn);
 
-    var rows = document.getElementsByClassName('row');
-    rows[0].parentNode.insertBefore(NewRow, rows[rows.length - 1]);
-    let editor = new Quill('#QuillTarget', options);
-    console.log("");
+    return NewRow;
 }
 function EditSection(elem){
 
