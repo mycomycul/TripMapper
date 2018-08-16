@@ -7,37 +7,41 @@ var options = {
     theme: 'snow'
 }
 //do this in document ready function so that editor is local and can be reused
-var editor = new Quill('#QuillTarget', options);
+$(document).ready(function(){
+let editor = new Quill('#QuillTarget', options);
+})
 
 function addNewSection() {
-    // var  newTextColumn = document.createElement("section");
-    //  newTextColumn.setAttribute("id", Math.floor(Math.random()*10000));
-    //  newTextColumn.innerHTML = editor.root.innerHTML;
+
+
+    var quillContents= document.getElementsByClassName('ql-editor')[0].innerHTML;
+
     var element = document.getElementById('quillcontainer').parentNode;
     while (element.lastChild) {
         element.removeChild(element.lastChild);
     }
+    
     element.setAttribute("id", Math.floor(Math.random()*10000));
-    element.innerHTML = editor.root.innerHTML;
+    element.innerHTML = quillContents;
     //Create new quill section
     var NewRow = document.createElement("div");
-    NewRow.setAttribute("class","row");
+    NewRow.className="row";
 
     var newTextColumn = document.createElement('section');
-    newTextColumn.setAttribute("class","text-column");
+    newTextColumn.className="text-column";
     
     var newQuillContainer = document.createElement("div");
-    newQuillContainer.setAttribute("class", "quillcontainer");
+    newQuillContainer.className= "quillcontainer";
     newQuillContainer.setAttribute("id", "quillcontainer");
 
     var newQuillTarget = document.createElement('div');
     newQuillTarget.setAttribute("id", "QuillTarget");
 
     var newButtonColumn = document.createElement("div");
-    newButtonColumn.setAttribute("class","button-column");
+    newButtonColumn.className="button-column";
     
     var newButtonContainer = document.createElement("div");
-    newButtonContainer.setAttribute("class","ctr");
+    newButtonContainer.className="ctr";
 
     var newButton1 = document.createElement("input");
     newButton1.setAttribute("type","button");
@@ -59,8 +63,10 @@ function addNewSection() {
 
     var rows = document.getElementsByClassName('row');
     rows[0].parentNode.insertBefore(NewRow, rows[rows.length - 1]);
-    let newEditor = new Quill('#QuillTarget', options);
+    let editor = new Quill('#QuillTarget', options);
     console.log("");
 }
+function EditSection(elem){
 
+}
 
