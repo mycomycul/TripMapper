@@ -19,11 +19,11 @@ function addNewSection() {
     var quillContents= document.getElementsByClassName('ql-editor')[0].innerHTML;
 
     var element = document.getElementById('quillcontainer').parentNode;
+    var newSectionId = element.id;
     while (element.lastChild) {
         element.removeChild(element.lastChild);
     }
     
-    var newSectionId = RandomId(5);
     element.setAttribute("id", newSectionId);
     element.innerHTML = quillContents;
 
@@ -37,6 +37,7 @@ function addNewSection() {
 function CreateRow(newSectionId){
     var NewRow = document.createElement("div");
     NewRow.className="row";
+    NewRow.id="row"+newSectionId;
 
     var newTextColumn = document.createElement('section');
     newTextColumn.className="text-column";
