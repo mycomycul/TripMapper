@@ -66,9 +66,11 @@ function CreateRow(newSectionId) {
     var newButton2 = document.createElement("input");
     newButton2.setAttribute("type", "button");
     newButton2.setAttribute("value", "X");
+    newButton2.id = "delete-" + newSectionId;
+    newButton2.setAttribute("onclick", "DeleteSection(this)");
+
     newButtonContainer.appendChild(newButton1);
     newButtonContainer.appendChild(newButton2);
-
 
     newQuillContainer.appendChild(newQuillTarget);
 
@@ -107,7 +109,9 @@ function EditSection(element) {
     // let editor = new Quill(('#\\'+SectionId), options);
     let editor = new Quill('#QuillTarget',options);
     editor.root.innerHTML = sectionToEditHtml;
-
+}
+function DeleteSection(childbutton){
+    var SectionId = childbutton.id.replace("delete-","");
+    document.getElementById("row"+SectionId).remove();
 
 }
-
