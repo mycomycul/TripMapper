@@ -83,7 +83,7 @@ function CreateRow(newSectionId) {
 }
 function EditSection(element) {
 
-    var SectionId = element.id.replace("edit-","");
+    var SectionId = element.id.replace("edit-", "");
 
     var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
     //Remove Quill API
@@ -107,11 +107,13 @@ function EditSection(element) {
     element.innerHTML = quillContents;
 
     // let editor = new Quill(('#\\'+SectionId), options);
-    let editor = new Quill('#QuillTarget',options);
+    let editor = new Quill('#QuillTarget', options);
     editor.root.innerHTML = sectionToEditHtml;
 }
-function DeleteSection(childbutton){
-    var SectionId = childbutton.id.replace("delete-","");
-    document.getElementById("row"+SectionId).remove();
-
+function DeleteSection(childbutton) {
+    var deleteConfirm = confirm("Are you sure you want to delete this seciton?");
+    if (deleteConfirm == true) {
+        var SectionId = childbutton.id.replace("delete-", "");
+        document.getElementById("row" + SectionId).remove();
+    }
 }
