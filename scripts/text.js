@@ -18,13 +18,13 @@ function addNewSection() {
 
     //Get text editor contents and destroy
     var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
-    var SectionButton = document.getElementById('quillcontainer').parentNode;
-    var newSectionId = SectionButton.id;
-    while (SectionButton.lastChild) {
-        SectionButton.removeChild(SectionButton.lastChild);
+    var TextSection = document.getElementById('quillcontainer').parentNode;
+    var newSectionId = TextSection.id;
+    while (TextSection.lastChild) {
+        TextSection.removeChild(TextSection.lastChild);
     }
     //Append quill content to text column
-    SectionButton.innerHTML = quillContents;
+    TextSection.innerHTML = quillContents;
     //Create new row, insert at end and attach quill editor
     var NewRow = CreateRow(RandomId(5));
     var rows = document.getElementsByClassName('row');
@@ -41,6 +41,7 @@ function CreateRow(newSectionId) {
     let newTextColumn = document.createElement('section');
     newTextColumn.className = "text-column";
     newTextColumn.id = newSectionId;
+
     let newQuillContainer = document.createElement("div");
     newQuillContainer.className = "quillcontainer";
     newQuillContainer.setAttribute("id", "quillcontainer");
@@ -75,15 +76,14 @@ function CreateRow(newSectionId) {
 
     return NewRow;
 }
-function EditSection(SectionButton) {
+function EditSection(sectionEditButton) {
 
-    var SectionId = SectionButton.id.replace("edit-", "");
+    var SectionId = sectionEditButton.id.replace("edit-", "");
     //Get Quill contents and remove
     var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
-    var SectionButton = document.getElementById('quillcontainer').parentNode;
-
-    while (SectionButton.lastChild) {
-        SectionButton.removeChild(SectionButton.lastChild);
+    var TextSection = document.getElementById('quillcontainer').parentNode;
+    while (TextSection.lastChild) {
+        TextSection.removeChild(TextSection.lastChild);
     }
     //Prepare Section for quill API
     var sectionToEdit = document.getElementById(SectionId);
@@ -96,7 +96,7 @@ function EditSection(SectionButton) {
     newQuillTarget.setAttribute("id", "QuillTarget");
     newQuillContainer.appendChild(newQuillTarget);
     sectionToEdit.appendChild(newQuillContainer);
-    SectionButton.innerHTML = quillContents;
+    TextSection.innerHTML = quillContents;
 
     // let editor = new Quill(('#\\'+SectionId), options);
     let editor = new Quill('#QuillTarget', options);
