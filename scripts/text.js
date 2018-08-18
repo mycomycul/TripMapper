@@ -1,6 +1,5 @@
 // swap set attribute with .className
-// create CreateQuill() to replace in editsection and new section
-
+//Create set multiple attribute method
 
 var options = {
     debug: 'info',
@@ -32,18 +31,22 @@ function addNewSection() {
     let editor = new Quill('#QuillTarget', options);
 }
 function CreateRow(newSectionId) {
-    //Contains text section and related buttons
+    //Create rows for containing text and button columns
     let NewRow = document.createElement("div");
     NewRow.className = "row";
     NewRow.id = "row" + newSectionId;
-    NewRow.setAttribute("draggable","true");
-    //Left Side Text Column
+    NewRow.setAttribute("ondrop","drop(event)");
+    NewRow.setAttribute("ondragover","allowDrop(event)");
+
+
+    //Text Column elements
     let newTextColumn = document.createElement('section');
     newTextColumn.className = "text-column";
     newTextColumn.id = newSectionId;
-
-    let newQuillContainer = CreateQuillContainer();
-    //Right Side Button Column
+    newTextColumn.setAttribute("draggable","true");
+    newTextColumn.setAttribute("ondragstart","drag(event)");
+    newTextColumn.appendChild(CreateQuillContainer());
+    //CreateButton column elements
     let newButtonColumn = document.createElement("div");
     newButtonColumn.className = "button-column";
     let newButtonContainer = document.createElement("div");
@@ -58,18 +61,14 @@ function CreateRow(newSectionId) {
     DeleteButton.setAttribute("value", "X");
     DeleteButton.id = "delete-" + newSectionId;
     DeleteButton.setAttribute("onclick", "DeleteSection(this)");
-
-    //Append to left side
-
-    newTextColumn.appendChild(newQuillContainer);
     //Assemble right side
     newButtonContainer.appendChild(EditButton);
     newButtonContainer.appendChild (DeleteButton);
     newButtonColumn.appendChild(newButtonContainer);
-    //Combine columns
+
+    //Assemble Row
     NewRow.appendChild(newTextColumn);
     NewRow.appendChild(newButtonColumn);
-
     return NewRow;
 }
 function EditSection(sectionEditButton) {
@@ -81,21 +80,13 @@ function EditSection(sectionEditButton) {
     while (TextSection.lastChild) {
         TextSection.removeChild(TextSection.lastChild);
     }
-    //Prepare Section for quill API
-    var sectionToEdit = document.getElementById(SectionId);
-    var sectionToEditHtml = sectionToEdit.innerHTML;
+    //Prepare Quill Section
+    let sectionToEdit = document.getElementById(SectionId);
+    let sectionToEditHtml = sectionToEdit.innerHTML;
     sectionToEdit.innerHTML = "";
-
-    var newQuillContainer = document.createElement("div");
-    newQuillContainer.className = "quillcontainer";
-    newQuillContainer.setAttribute("id", "quillcontainer");
-    var newQuillTarget = document.createElement('div');
-    newQuillTarget.setAttribute("id", "QuillTarget");
-    newQuillContainer.appendChild(newQuillTarget);
-    sectionToEdit.appendChild(newQuillContainer);
+    sectionToEdit.appendChild(CreateQuillContainer());
     TextSection.innerHTML = quillContents;
-
-    // let editor = new Quill(('#\\'+SectionId), options);
+    //Attach Quill
     let editor = new Quill('#QuillTarget', options);
     editor.root.innerHTML = sectionToEditHtml;
 }
@@ -117,4 +108,16 @@ function CreateQuillContainer(){
     newQuillTarget.setAttribute("id", "QuillTarget");
     newQuillContainer.appendChild(newQuillTarget);
     return newQuillContainer;
+}
+
+function drag(ev){
+    ev.dataTransfer.setData("text",ev.target.id);
+}
+function drop(ev){
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+function allowDrop(ev) {
+    ev.preventDefault();
 }
