@@ -42,11 +42,7 @@ function CreateRow(newSectionId) {
     newTextColumn.className = "text-column";
     newTextColumn.id = newSectionId;
 
-    let newQuillContainer = document.createElement("div");
-    newQuillContainer.className = "quillcontainer";
-    newQuillContainer.setAttribute("id", "quillcontainer");
-    let newQuillTarget = document.createElement('div');
-    newQuillTarget.setAttribute("id", "QuillTarget");
+    let newQuillContainer = CreateQuillContainer();
     //Right Side Button Column
     let newButtonColumn = document.createElement("div");
     newButtonColumn.className = "button-column";
@@ -64,7 +60,7 @@ function CreateRow(newSectionId) {
     DeleteButton.setAttribute("onclick", "DeleteSection(this)");
 
     //Append to left side
-    newQuillContainer.appendChild(newQuillTarget);
+
     newTextColumn.appendChild(newQuillContainer);
     //Assemble right side
     newButtonContainer.appendChild(EditButton);
@@ -89,6 +85,7 @@ function EditSection(sectionEditButton) {
     var sectionToEdit = document.getElementById(SectionId);
     var sectionToEditHtml = sectionToEdit.innerHTML;
     sectionToEdit.innerHTML = "";
+
     var newQuillContainer = document.createElement("div");
     newQuillContainer.className = "quillcontainer";
     newQuillContainer.setAttribute("id", "quillcontainer");
@@ -111,4 +108,13 @@ function DeleteSection(childbutton) {
 }
 function MoveSection(){
 
+}
+function CreateQuillContainer(){
+    let newQuillContainer = document.createElement("div");
+    newQuillContainer.className = "quillcontainer";
+    newQuillContainer.setAttribute("id", "quillcontainer");
+    let newQuillTarget = document.createElement('div');
+    newQuillTarget.setAttribute("id", "QuillTarget");
+    newQuillContainer.appendChild(newQuillTarget);
+    return newQuillContainer;
 }
