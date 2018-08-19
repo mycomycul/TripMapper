@@ -37,14 +37,15 @@ function CreateRow(newSectionId) {
     NewRow.id = "row" + newSectionId;
     NewRow.setAttribute("ondrop","drop(event)");
     NewRow.setAttribute("ondragover","allowDrop(event)");
+    NewRow.setAttribute("draggable","true");
+    NewRow.setAttribute("ondragstart","drag(event)");
 
 
     //Text Column elements
     let newTextColumn = document.createElement('section');
     newTextColumn.className = "text-column";
     newTextColumn.id = newSectionId;
-    newTextColumn.setAttribute("draggable","true");
-    newTextColumn.setAttribute("ondragstart","drag(event)");
+
     newTextColumn.appendChild(CreateQuillContainer());
     //CreateButton column elements
     let newButtonColumn = document.createElement("div");
@@ -116,7 +117,9 @@ function drag(ev){
 function drop(ev){
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+    var target = ev.target;
+    ev.target.parentNode.insertBefore(document.getElementById(data), ev.target.nextSibling);
+    // ev.target.appendChild();
 }
 function allowDrop(ev) {
     ev.preventDefault();
