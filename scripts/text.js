@@ -118,7 +118,13 @@ function drop(ev){
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var target = ev.target;
-    ev.target.parentNode.insertBefore(document.getElementById(data), ev.target.nextSibling);
+    while(!target.classList.contains("row")){
+        target=target.parentNode;
+    }
+
+
+
+    document.body.insertBefore(document.getElementById(data), target);
     // ev.target.appendChild();
 }
 function allowDrop(ev) {
