@@ -9,9 +9,33 @@ var options = {
 //do this in document ready function so that editor is local and can be reused
 $(document).ready(function () {
     let newRow = CreateRow(RandomId(5));
-    document.body.insertBefore(newRow, document.body.childNodes[4]);
+    document.body.insertBefore(newRow, document.body.childNodes[6]);
     let editor = new Quill('#QuillTarget', options);
 })
+
+//PAGE FUNCTIONALITY FUNCTION
+
+function RandomId(size){
+    var id = ""
+        while(id.length < size){
+        id = id + Math.floor((Math.random() * 10)).toString();
+        console.log(id);
+        }
+        console.log(id.length);
+    return id;
+    }
+    function ChangeLightMode(elem){
+        if (elem.value == "Darkmode"){
+            elem.value = "Lightmode"
+            document.body.className="darkmode"
+        }
+        else{
+            elem.value = "Darkmode"
+            document.body.className="lightmode"    
+        }
+    }
+
+//QUILL  and SECTION FUNCTIONALITY
 
 function addNewSection() {
 
@@ -52,19 +76,25 @@ function CreateRow(newSectionId) {
     newButtonColumn.className = "button-column";
     let newButtonContainer = document.createElement("div");
     newButtonContainer.className = "ctr";
-    let EditButton = document.createElement("input");
-    EditButton.setAttribute("type", "button");
-    EditButton.setAttribute("value", "Edit");
-    EditButton.setAttribute("id", ("edit-" + newSectionId));
-    EditButton.setAttribute("onclick", "EditSection(this)");
-    let DeleteButton = document.createElement("input");
-    DeleteButton.setAttribute("type", "button");
-    DeleteButton.setAttribute("value", "X");
-    DeleteButton.id = "delete-" + newSectionId;
-    DeleteButton.setAttribute("onclick", "DeleteSection(this)");
+    let mapButton = document.createElement("input");
+    mapButton.setAttribute("type", "button");
+    mapButton.setAttribute("value", "Map");
+    mapButton.setAttribute("id", ("map-" + newSectionId));
+    mapButton.setAttribute("onclick", "mapSection(this)");
+    let editButton = document.createElement("input");
+    editButton.setAttribute("type", "button");
+    editButton.setAttribute("value", "Edit");
+    editButton.setAttribute("id", ("edit-" + newSectionId));
+    editButton.setAttribute("onclick", "EditSection(this)");
+    let deleteButton = document.createElement("input");
+    deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("value", "X");
+    deleteButton.id = "delete-" + newSectionId;
+    deleteButton.setAttribute("onclick", "DeleteSection(this)");
     //Assemble right side
-    newButtonContainer.appendChild(EditButton);
-    newButtonContainer.appendChild (DeleteButton);
+    newButtonContainer.appendChild(mapButton);
+    newButtonContainer.appendChild(editButton);
+    newButtonContainer.appendChild (deleteButton);
     newButtonColumn.appendChild(newButtonContainer);
 
     //Assemble Row
@@ -111,6 +141,8 @@ function CreateQuillContainer(){
     return newQuillContainer;
 }
 
+//SECTION DRAG AND DROP FUNCTIONS
+
 function drag(ev){
     ev.dataTransfer.setData("text",ev.target.id);
 }
@@ -121,12 +153,12 @@ function drop(ev){
     while(!target.classList.contains("row")){
         target=target.parentNode;
     }
-
-
-
     document.body.insertBefore(document.getElementById(data), target);
     // ev.target.appendChild();
 }
 function allowDrop(ev) {
     ev.preventDefault();
 }
+
+//GOOGLE MAP FUNCTIONS
+
