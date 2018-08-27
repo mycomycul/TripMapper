@@ -42,6 +42,8 @@ function mapSection(rowmapbutton, latLng) {
 
 }
 function addLocation(map, latLng) {
-    alert(latLng.lng() + " " + latLng.lat());
-    document.getElementById('row-'+mappingId).setAttribute("data-location",latLng.lng() + " " + latLng.lat())
+    // alert(latLng.lng() + " " + latLng.lat());
+    document.getElementById('row-'+mappingId).setAttribute("data-location",latLng.lng() + " " + latLng.lat());
+    document.getElementById('rowinfo-'+mappingId).innerHTML = (latLng.lng() + " " + latLng.lat());
+
 }
