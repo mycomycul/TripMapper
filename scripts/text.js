@@ -1,6 +1,8 @@
 // swap set attribute with .className
 //Create set multiple attribute method
-//Prevent quill change when clicking edit on currently edited section
+//Prevent quill change when clicking edit on currently edited section - add secction # to all elements all the time
+//Move Row Info with Row
+
 
 var options = {
     debug: 'info',
@@ -88,22 +90,20 @@ function CreateRow(newSectionId) {
     //Create rows for containing text and button columns
     let NewRow = document.createElement("div");
     NewRow.className = "row";
-    NewRow.id = "row" + newSectionId;
+    NewRow.id = "row-" + newSectionId;
     NewRow.setAttribute("ondrop", "drop(event)");
     NewRow.setAttribute("ondragover", "allowDrop(event)");
     NewRow.setAttribute("draggable", "true");
     NewRow.setAttribute("ondragstart", "drag(event)");
-
-
     //Text Column elements
     let newTextColumn = document.createElement('section');
     newTextColumn.className = "text-column";
-    newTextColumn.id = newSectionId;
+    newTextColumn.id = "text-"+newSectionId;
     let rowInfo = document.createElement("div");
     rowInfo.setAttribute("class", "row-info");
-    rowInfo.setAttribute("id", ("rowinfo-" + newSectionId));
+    rowInfo.id = ("rowinfo-" + newSectionId);
     rowInfo.innerHTML = "Row Info";
-    
+
     newTextColumn.appendChild(CreateQuillContainer());
     newTextColumn.appendChild(rowInfo);
 
@@ -151,7 +151,7 @@ function EditSection(sectionEditButton) {
         TextSection.removeChild(TextSection.lastChild);
     }
     //Prepare Quill Section
-    let sectionToEdit = document.getElementById(SectionId);
+    let sectionToEdit = document.getElementById("text-" + SectionId);
     let sectionToEditHtml = sectionToEdit.innerHTML;
     sectionToEdit.innerHTML = "";
     sectionToEdit.appendChild(CreateQuillContainer());
@@ -167,9 +167,7 @@ function DeleteSection(childbutton) {
         document.getElementById("row" + SectionId).remove();
     }
 }
-function MoveSection() {
 
-}
 function CreateQuillContainer() {
     let newQuillContainer = document.createElement("div");
     newQuillContainer.className = "quillcontainer";
