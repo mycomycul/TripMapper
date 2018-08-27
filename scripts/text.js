@@ -16,29 +16,32 @@ $(document).ready(function () {
 })
 
 
-window.onscroll = function() {stickyHeader()};
+window.onscroll = function () { stickyHeader() };
 //PAGE FUNCTIONALITY FUNCTION
 
 //STICKY FEATURES
 
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function stickyHeader() {
-var map = document.getElementById("mapcontainer");
-var header = document.getElementById("header")
-// Get the offset position of the navbar
-var sticky = map.offsetTop;
-  if (window.pageYOffset - header.offsetTop > sticky) {
-    map.classList.add("sticky");
-   document.getElementById('mapcontainer').style.position = "fixed";
-   document.getElementsByClassName('row')[1].style.paddingTop = "400px";
-  } else {
-    map.classList.remove("sticky");
-   document.getElementById('mapcontainer').style.position = "";
-   document.getElementById('mapcontainer').style.overflow = "hidden";
-   document.getElementsByClassName('row')[1].style.paddingTop = "0px";
+    let map = document.getElementById("mapcontainer");
+    let header = document.getElementById("header").offsetHeight;
+    let sectionTop = document.getElementsByClassName("row")[1].offsetTop;
 
-  }
-} 
+    // Get the offset position of the navbar
+    var sticky = map.offsetTop;
+    let w = window.pageYOffset;
+    if (window.pageYOffset > header) {
+        map.classList.add("sticky");
+        map.style.position = "fixed";
+        document.getElementsByClassName('row')[1].style.paddingTop = "400px";
+    } else {
+        map.classList.remove("sticky");
+        map.style.position = "";
+        map.style.overflow = "hidden";
+        document.getElementsByClassName('row')[1].style.paddingTop = "0px";
+
+    }
+}
 
 function RandomId(size) {
     var id = ""
