@@ -1,5 +1,6 @@
 // swap set attribute with .className
 //Create set multiple attribute method
+//Prevent quill change when clicking edit on currently edited section
 
 var options = {
     debug: 'info',
@@ -11,29 +12,54 @@ $(document).ready(function () {
     let newRow = CreateRow(RandomId(5));
     document.body.insertBefore(newRow, document.body.childNodes[6]);
     let editor = new Quill('#QuillTarget', options);
+    document.getElementById('googleMap1').style.position = "";
 })
 
+
+window.onscroll = function() {stickyHeader()};
 //PAGE FUNCTIONALITY FUNCTION
 
-function RandomId(size){
+//STICKY FEATURES
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function stickyHeader() {
+var map = document.getElementById("mapcontainer");
+var header = document.getElementById("header")
+// Get the offset position of the navbar
+var sticky = map.offsetTop;
+  if (window.pageYOffset - header.offsetTop > sticky) {
+    map.classList.add("sticky");
+   document.getElementById('mapcontainer').style.position = "fixed";
+   document.getElementsByClassName('row')[1].style.paddingTop = "400px";
+  } else {
+    map.classList.remove("sticky");
+   document.getElementById('mapcontainer').style.position = "";
+   document.getElementById('mapcontainer').style.overflow = "hidden";
+   document.getElementsByClassName('row')[1].style.paddingTop = "0px";
+
+  }
+} 
+
+function RandomId(size) {
     var id = ""
-        while(id.length < size){
+    while (id.length < size) {
         id = id + Math.floor((Math.random() * 10)).toString();
         console.log(id);
-        }
-        console.log(id.length);
+    }
+    console.log(id.length);
     return id;
+}
+function ChangeLightMode(elem) {
+    if (elem.value == "Darkmode") {
+        elem.value = "Lightmode"
+        document.body.className = "darkmode"
     }
-    function ChangeLightMode(elem){
-        if (elem.value == "Darkmode"){
-            elem.value = "Lightmode"
-            document.body.className="darkmode"
-        }
-        else{
-            elem.value = "Darkmode"
-            document.body.className="lightmode"    
-        }
+    else {
+        elem.value = "Darkmode"
+        document.body.className = "lightmode"
     }
+}
+
 
 //QUILL  and SECTION FUNCTIONALITY
 
@@ -59,10 +85,10 @@ function CreateRow(newSectionId) {
     let NewRow = document.createElement("div");
     NewRow.className = "row";
     NewRow.id = "row" + newSectionId;
-    NewRow.setAttribute("ondrop","drop(event)");
-    NewRow.setAttribute("ondragover","allowDrop(event)");
-    NewRow.setAttribute("draggable","true");
-    NewRow.setAttribute("ondragstart","drag(event)");
+    NewRow.setAttribute("ondrop", "drop(event)");
+    NewRow.setAttribute("ondragover", "allowDrop(event)");
+    NewRow.setAttribute("draggable", "true");
+    NewRow.setAttribute("ondragstart", "drag(event)");
 
 
     //Text Column elements
@@ -94,7 +120,7 @@ function CreateRow(newSectionId) {
     //Assemble right side
     newButtonContainer.appendChild(mapButton);
     newButtonContainer.appendChild(editButton);
-    newButtonContainer.appendChild (deleteButton);
+    newButtonContainer.appendChild(deleteButton);
     newButtonColumn.appendChild(newButtonContainer);
 
     //Assemble Row
@@ -128,10 +154,10 @@ function DeleteSection(childbutton) {
         document.getElementById("row" + SectionId).remove();
     }
 }
-function MoveSection(){
+function MoveSection() {
 
 }
-function CreateQuillContainer(){
+function CreateQuillContainer() {
     let newQuillContainer = document.createElement("div");
     newQuillContainer.className = "quillcontainer";
     newQuillContainer.setAttribute("id", "quillcontainer");
@@ -143,15 +169,15 @@ function CreateQuillContainer(){
 
 //SECTION DRAG AND DROP FUNCTIONS
 
-function drag(ev){
-    ev.dataTransfer.setData("text",ev.target.id);
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
 }
-function drop(ev){
+function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var target = ev.target;
-    while(!target.classList.contains("row")){
-        target=target.parentNode;
+    while (!target.classList.contains("row")) {
+        target = target.parentNode;
     }
     document.body.insertBefore(document.getElementById(data), target);
     // ev.target.appendChild();
