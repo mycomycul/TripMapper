@@ -31,7 +31,7 @@ function stickyHeader() {
     // Get the offset position of the navbar
     var sticky = map.offsetTop;
     let w = window.pageYOffset;
-    if (window.pageYOffset > header) {
+    if (window.pageYOffset > header + 18) {
         map.classList.add("sticky");
         map.style.position = "fixed";
         document.getElementsByClassName('row')[1].style.paddingTop = "400px";
@@ -99,8 +99,15 @@ function CreateRow(newSectionId) {
     let newTextColumn = document.createElement('section');
     newTextColumn.className = "text-column";
     newTextColumn.id = newSectionId;
-
+    let rowInfo = document.createElement("div");
+    rowInfo.setAttribute("class", "row-info");
+    rowInfo.setAttribute("id", ("rowinfo-" + newSectionId));
+    rowInfo.innerHTML = "Row Info";
+    
     newTextColumn.appendChild(CreateQuillContainer());
+    newTextColumn.appendChild(rowInfo);
+
+
     //CreateButton column elements
     let newButtonColumn = document.createElement("div");
     newButtonColumn.className = "button-column";
@@ -121,11 +128,13 @@ function CreateRow(newSectionId) {
     deleteButton.setAttribute("value", "X");
     deleteButton.id = "delete-" + newSectionId;
     deleteButton.setAttribute("onclick", "DeleteSection(this)");
+
     //Assemble right side
     newButtonContainer.appendChild(mapButton);
     newButtonContainer.appendChild(editButton);
     newButtonContainer.appendChild(deleteButton);
     newButtonColumn.appendChild(newButtonContainer);
+
 
     //Assemble Row
     NewRow.appendChild(newTextColumn);
