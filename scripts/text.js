@@ -10,7 +10,8 @@ var options = {
 //do this in document ready function so that editor is local and can be reused
 $(document).ready(function () {
     let newRow = CreateRow(RandomId(5));
-    document.body.insertBefore(newRow, document.body.childNodes[6]);
+    let newSectionButton = document.getElementById('newsectionbutton');
+    document.body.insertBefore(newRow,newSectionButton);
     let editor = new Quill('#QuillTarget', options);
     document.getElementById('googleMap1').style.position = "";
 })
