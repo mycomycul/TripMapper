@@ -1,5 +1,6 @@
 var map;
-var mappingId
+var mappingId;
+var markers = [];
 (function (d) {
     let file = 'https://maps.googleapis.com/maps/api/js?key=' + googlekey + '&callback=createMap';
     let ref = d.getElementsByTagName('script')[0];
@@ -45,5 +46,11 @@ function addLocation(map, latLng) {
     // alert(latLng.lng() + " " + latLng.lat());
     document.getElementById('row-'+mappingId).setAttribute("data-location",latLng.lng() + " " + latLng.lat());
     document.getElementById('rowinfo-'+mappingId).innerHTML = (latLng.lng() + " " + latLng.lat());
+    createMarker(latLng);
+}
 
+function createMarker(latLng){
+    var newMarker = {[mappingId]:{"lng":latLng.lng(),"lat":latLng.lat()}}
+    markers.push(newMarker);
+    console.log(markers[0].values());
 }
