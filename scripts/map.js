@@ -50,7 +50,13 @@ function addLocation(map, latLng) {
 }
 
 function createMarker(latLng){
-    var newMarker = {[mappingId]:{"lng":latLng.lng(),"lat":latLng.lat()}}
+    var newMarkerPosition = {lng:latLng.lng(),lat:latLng.lat()}
+    var newMarker = new google.maps.Marker({position:newMarkerPosition,
+        title:[mappingId].toString(),
+        map:map});
+    newMarker.addListener('click',function(){
+        markers[0].setMap(null);
+    })
     markers.push(newMarker);
-    console.log(markers[0].values());
+    console.log();
 }
