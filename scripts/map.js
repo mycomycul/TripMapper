@@ -44,19 +44,38 @@ function mapSection(rowmapbutton, latLng) {
 }
 function addLocation(map, latLng) {
     // alert(latLng.lng() + " " + latLng.lat());
-    document.getElementById('row-'+mappingId).setAttribute("data-location",latLng.lng() + " " + latLng.lat());
-    document.getElementById('rowinfo-'+mappingId).innerHTML = (latLng.lng() + " " + latLng.lat());
+    document.getElementById('row-' + mappingId).dataset.location = (latLng.lng() + " " + latLng.lat());
+    document.getElementById('map-' + mappingId).setAttribute("onclick", "deleteLocation(this)");
+    document.getElementById('map-' + mappingId).value = "xMap";
+    if (document.getElementById('rowinfo-' + mappingId)) {
+        document.getElementById('rowinfo-' + mappingId).innerHTML = (latLng.lng() + " " + latLng.lat());
+    }
+
     createMarker(latLng);
 }
 
-function createMarker(latLng){
-    var newMarkerPosition = {lng:latLng.lng(),lat:latLng.lat()}
-    var newMarker = new google.maps.Marker({position:newMarkerPosition,
-        title:[mappingId].toString(),
-        map:map});
-    newMarker.addListener('click',function(){
-        markers[0].setMap(null);
-    })
+function createMarker(latLng) {
+    var newMarkerPosition = { lng: latLng.lng(), lat: latLng.lat() }
+    var newMarker = new google.maps.Marker({
+        position: newMarkerPosition,
+        title: [mappingId].toString(),
+        map: map
+    });
     markers.push(newMarker);
     console.log();
+}
+function deleteLocation(mapButton) {
+    let sectionId = mapButton.id.replace("map-", "");
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].title == sectionId) {
+            markers[i].setMap(null);
+            markers.splice(i,1)
+        }
+        document.getElementById('row-' + sectionId).dataset.location = "";
+        document.getElementById('map-' + sectionId).setAttribute("onclick", "mapSection(this)");
+        document.getElementById('map-' + sectionId).value = "Map";
+        if (document.getElementById('rowinfo-' + sectionId)) {
+            document.getElementById('rowinfo-' + sectionId).innerHTML = "";
+        }
+    }
 }
