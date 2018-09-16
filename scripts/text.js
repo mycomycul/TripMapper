@@ -13,7 +13,7 @@ var options = {
 $(document).ready(function () {
     let newRow = CreateRow(RandomId(5));
     let newSectionButton = document.getElementById('newsectionbutton');
-    document.body.insertBefore(newRow,newSectionButton);
+    document.body.insertBefore(newRow, newSectionButton);
     let editor = new Quill('#QuillTarget', options);
     document.getElementById('googleMap1').style.position = "";
 })
@@ -98,7 +98,7 @@ function CreateRow(newSectionId) {
     //Text Column elements
     let newTextColumn = document.createElement('section');
     newTextColumn.className = "text-column";
-    newTextColumn.id = "text-"+newSectionId;
+    newTextColumn.id = "text-" + newSectionId;
     let rowInfo = document.createElement("div");
     rowInfo.setAttribute("class", "row-info");
     rowInfo.id = ("rowinfo-" + newSectionId);
@@ -142,23 +142,25 @@ function CreateRow(newSectionId) {
     return NewRow;
 }
 function EditSection(sectionEditButton) {
-
-    var SectionId = sectionEditButton.id.replace("edit-", "");
-    //Get Quill contents and remove
-    var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
-    var TextSection = document.getElementById('quillcontainer').parentNode;
-    while (TextSection.lastChild) {
-        TextSection.removeChild(TextSection.lastChild);
+    var sectionToEditId = sectionEditButton.id.replace("edit-", "");
+    var editedSectionId = document.getElementById('quillcontainer').parentNode.id.replace("text-", "");
+    if (sectionToEditId != editedSectionId) {
+        //Get Quill contents and remove
+        var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
+        var editedSection = document.getElementById('quillcontainer').parentNode;
+        while (editedSection.lastChild) {
+            editedSection.removeChild(editedSection.lastChild);
+        }
+        //Prepare Quill Section
+        let sectionToEdit = document.getElementById("text-" + sectionToEditId);
+        let sectionToEditHtml = sectionToEdit.innerHTML;
+        sectionToEdit.innerHTML = "";
+        sectionToEdit.appendChild(CreateQuillContainer());
+        editedSection.innerHTML = quillContents;
+        //Attach Quill
+        let editor = new Quill('#QuillTarget', options);
+        editor.root.innerHTML = sectionToEditHtml;
     }
-    //Prepare Quill Section
-    let sectionToEdit = document.getElementById("text-" + SectionId);
-    let sectionToEditHtml = sectionToEdit.innerHTML;
-    sectionToEdit.innerHTML = "";
-    sectionToEdit.appendChild(CreateQuillContainer());
-    TextSection.innerHTML = quillContents;
-    //Attach Quill
-    let editor = new Quill('#QuillTarget', options);
-    editor.root.innerHTML = sectionToEditHtml;
 }
 function DeleteSection(childbutton) {
     var deleteConfirm = confirm("Are you sure you want to delete this seciton?");
