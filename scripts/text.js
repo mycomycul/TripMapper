@@ -75,11 +75,12 @@ function addNewSection() {
     var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
     var TextSection = document.getElementById('quillcontainer').parentNode;
     var newSectionId = TextSection.id;
-    while (TextSection.lastChild) {
-        TextSection.removeChild(TextSection.lastChild);
-    }
+    TextSection.removeChild(TextSection.childNodes[0]);
+
     //Append quill content to text column
-    TextSection.innerHTML = quillContents;
+    TextSection.childNodes[0].insertAdjacentHTML('beforebegin',quillContents);
+
+    // TextSection.innerHTML = quillContents;
     //Create new row, insert at end and attach quill editor
     var NewRow = CreateRow(RandomId(5));
     var rows = document.getElementsByClassName('row');
@@ -144,22 +145,40 @@ function CreateRow(newSectionId) {
 function EditSection(sectionEditButton) {
     var sectionToEditId = sectionEditButton.id.replace("edit-", "");
     var editedSectionId = document.getElementById('quillcontainer').parentNode.id.replace("text-", "");
+    
+    //Check to make sure you are trying to edite a seciton that is currently being edited
     if (sectionToEditId != editedSectionId) {
         //Get Quill contents and remove
         var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
         var editedSection = document.getElementById('quillcontainer').parentNode;
-        while (editedSection.lastChild) {
-            editedSection.removeChild(editedSection.lastChild);
-        }
+            editedSection.removeChild(editedSection.childNodes[0]);
+            editedSection.childNodes[0].insertAdjacentHTML('beforebegin',quillContents);
+            // editedSection.insertBefore(quillContents,editedSection.childNodes[0]);
         //Prepare Quill Section
         let sectionToEdit = document.getElementById("text-" + sectionToEditId);
+        var rowData = sectionToEdit.lastChild;
+        sectionToEdit.removeChild(sectionToEdit.lastChild);  
         let sectionToEditHtml = sectionToEdit.innerHTML;
+        var pasteOrNot = new Boolean(sectionToEdit.textContent != "");
+     
         sectionToEdit.innerHTML = "";
         sectionToEdit.appendChild(CreateQuillContainer());
-        editedSection.innerHTML = quillContents;
+        sectionToEdit.appendChild(rowData);
+        
         //Attach Quill
         let editor = new Quill('#QuillTarget', options);
+
+        // editor.setText(sectionToEditHtml);
+        if (pasteOrNot == true){
         editor.root.innerHTML = sectionToEditHtml;
+        }
+      
+
+
+
+        // document.getElementsByClassName('ql-editor')[0].innerHTML = "" ;
+        // document.getElementsByClassName('ql-editor')[0].innerHTML = sectionToEditHtml ;
+
     }
 }
 function DeleteSection(childbutton) {
