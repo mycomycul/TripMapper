@@ -172,13 +172,6 @@ function EditSection(sectionEditButton) {
         if (pasteOrNot == true){
         editor.root.innerHTML = sectionToEditHtml;
         }
-      
-
-
-
-        // document.getElementsByClassName('ql-editor')[0].innerHTML = "" ;
-        // document.getElementsByClassName('ql-editor')[0].innerHTML = sectionToEditHtml ;
-
     }
 }
 function DeleteSection(childbutton) {
@@ -219,4 +212,10 @@ function allowDrop(ev) {
 }
 
 //GOOGLE MAP FUNCTIONS
+
+function isElementOnScreen(element){
+    let boundingBox = element.getBoundingClientRect
+    var onScreen = (boundingBox.top >= 0) && (boundingBox.bottom <= window.innerHeight);
+    return onScreen;
+}
 
