@@ -4,7 +4,30 @@
 :root{
     --mono-font:'Major Mono Display', monospace;
 }
-        
+.light-mode-icon{
+    height:30px;
+    width:30px;
+    stroke:black;
+    fill-opacity: 0;
+}
+#light-icon-rays{
+    transition: stroke 300ms;
+}
+#light-icon-center{
+    transition: stroke 300ms, fill-opacity 300ms;
+}
+
+.light-mode-icon:hover > #light-icon-rays{
+stroke:white;
+
+}
+.light-mode-icon-darkmode {
+stroke:white;
+}
+.light-mode-icon-darkmode:hover > #light-icon-center {
+    fill:white;
+    fill-opacity: 1;
+    }        
 /*Change Lightmode Functionality*/
 .darkmode{
     background-color: black;
