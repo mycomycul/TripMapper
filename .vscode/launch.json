@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 
+
         {
             "type": "node",
             "request": "launch",
@@ -20,8 +21,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Quill",
-            "file": "${workspaceFolder}/Quill.html"
+            "name": "Launch Index",
+            "file": "${workspaceFolder}/Index.html"
         }
     ]
 }
