@@ -1,13 +1,23 @@
-
+*{
+    box-sizing: border-box;    
+}
+:root{
+    --mono-font:'Major Mono Display', monospace;
+}
         
 /*Change Lightmode Functionality*/
 .darkmode{
     background-color: black;
-    color:white;
+    /* color:white; */
 }
 .lightmode{
-    background-color: gray;
+    background-color: rgb(169, 172, 169);
     color:black;
+}
+#header{
+    text-align: center;
+    color:white;
+    font-family: var(--mono-font);
 }
 
 /*Sticky Header Map*/
@@ -29,29 +39,51 @@
 
 /*Quill Column Formatting*/
 
-*{
-    box-sizing: border-box;    
-}
-[class$="column"] {
-    float: left;
-    border: 1px solid red;
-    align-items:center;
-}
-.ql-editor{
-    height:calc(100% - 2 * 5px);
-}
+
 .row {
     display: flex;
     align-items: stretch;
     flex-wrap: wrap;
+    background-color: #474747;
+    border-radius: 5px;
+    padding:5px;
+    margin-bottom:5px;
 }
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+[class$="column"] {
+    float: left;
+    border: 1px solid #474747 ;
+    /* border-radius: 15px; */
+    align-items:center;
+   
+    background-color:rgb(228, 228, 228);
+    overflow-wrap: normal;
+
+}
+.quillcontainer{
+    float:left;
+    width:100%;
+}
+.ql-editor{
+    height:calc(100% - 2 * 5px);
+}
+
 
 .text-column{
     width: 80%;
-    display: table-cell;
+    /* display:flex; */
     position:relative;
     padding:5px;
 }
+.text-column::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
 .button-column{
     width:20%;
     display: flex;
@@ -59,7 +91,8 @@
 
 }
 .row-info{
-    border: 1px solid red;
+    float:left;
+    border: 1px solid #474747;
     width: 100%;
 }
 
@@ -78,4 +111,7 @@
 }
 .ctr{
     margin:auto;
+}
+.ql-snow{
+
 }
