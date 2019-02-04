@@ -56,12 +56,13 @@ function RandomId(size) {
     return id;
 }
 function ChangeLightMode(elem) {
-    if (elem.value == "Darkmode") {
-        elem.value = "Lightmode"
+    if (elem.dataset.value == "darkmode") {
+        
+        elem.dataset.value = "lightmode"
         document.body.className = "darkmode"
     }
     else {
-        elem.value = "Darkmode"
+        elem.dataset.value = "darkmode"
         document.body.className = "lightmode"
     }
 }
@@ -217,5 +218,20 @@ function isElementOnScreen(element){
     let boundingBox = element.getBoundingClientRect
     var onScreen = (boundingBox.top >= 0) && (boundingBox.bottom <= window.innerHeight);
     return onScreen;
+}
+
+function ChangeLightMode(elem) {
+    if (elem.dataset.value == "darkmode") {
+        
+        elem.dataset.value = "lightmode"
+        document.body.className = "darkmode"
+        // document.getElementById('light-icon-rays').classList.add("rays-darkmode");
+        elem.classList.add("light-mode-icon-darkmode");
+    }
+    else {
+        elem.dataset.value = "darkmode"
+        document.body.className = "lightmode"
+        elem.classList.remove("light-mode-icon-darkmode");
+    }
 }
 
