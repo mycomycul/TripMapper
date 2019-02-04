@@ -10,11 +10,32 @@
     <script src="scripts/jquery-3.3.1.min.js"></script>
 </head>
 
-<body class="darkmode">
+<body class="lightmode">
     <div id="header">
         <h1>Trip Mapper</h1>
-        <input type="button" class="ctr" onclick="ChangeLightMode(this)" value="Lightmode">
-    </div>
+
+
+        <svg version="2" onClick="ChangeLightMode(this)" id="light-icon" class="light-mode-icon"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 190.3 190.8"
+	 xml:space="preserve" data-value="darkmode" ><title id="light-icon-title">Change Light Mode</title>
+
+<g id="light-icon-rays" fill="none" stroke-width="6" >
+		<line id="XMLID_2_"  stroke-miterlimit="10" x1="95.3" y1="3.2" x2="95.3" y2="36.4"/>
+		<line id="XMLID_3_" stroke-miterlimit="10" x1="95.3" y1="154.6" x2="95.3" y2="187.8"/>
+		<line id="XMLID_5_" stroke-miterlimit="10" x1="3.1" y1="92.9" x2="36.1" y2="92.9"/>
+		<line id="XMLID_4_" stroke-miterlimit="10" x1="154.4" y1="92.9" x2="187.4" y2="92.9"/>
+		<line id="XMLID_7_" stroke-miterlimit="10" x1="49.2" y1="15.6" x2="65.7" y2="44.4"/>
+		<line id="XMLID_6_" stroke-miterlimit="10" x1="124.8" y1="146.6" x2="141.3" y2="175.4"/>
+		<line id="XMLID_9_" stroke-miterlimit="10" x1="15.4" y1="46.8" x2="44" y2="63.4"/>
+		<line id="XMLID_8_" stroke-miterlimit="10" x1="146.5" y1="122.5" x2="175.1" y2="139.1"/>
+		<line id="XMLID_11_" stroke-miterlimit="10" x1="13.8" y1="141.6" x2="42.4" y2="125"/>
+		<line id="XMLID_10_" stroke-miterlimit="10" x1="144.9" y1="66" x2="173.5" y2="49.4"/>
+		<line id="XMLID_12_" stroke-miterlimit="10" x1="124.8" y1="44.4" x2="141.3" y2="15.6"/>
+		<line id="XMLID_13_" stroke-miterlimit="10" x1="49.2" y1="175.4" x2="65.7" y2="146.6"/>
+</g>
+<circle id="light-icon-center"  stroke-width="6" stroke-miterlimit="10" cx="95.3" cy="95.5" r="39.7"/>
+
+</svg>
+</div>
     <div class="row map" id="mapcontainer">
         <div id="googleMap1" style="width:100%;height:400px;"></div>
     </div>
@@ -24,6 +45,8 @@
             <input class="ctr" type="button" onclick="addNewSection()" value="New Section">
         </div>
     </div>
+
+    <!-- Quill Api -->
     <script src="scripts/quill.js"></script>
     <script src="scripts/text.js"></script>
     <script src="key/Googlemaps.js"></script>
