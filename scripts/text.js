@@ -2,7 +2,7 @@
  *Create method for setting multiple attributes
  *Prevent quill change when clicking edit on currently edited section - add secction # to all elements all the time
  *Reduce map width when sticky
- *Fix Delete Row*/
+*/
 
 
 var options = {
