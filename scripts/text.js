@@ -1,7 +1,8 @@
-// swap set attribute with .className
-//Create set multiple attribute method
-//Prevent quill change when clicking edit on currently edited section - add secction # to all elements all the time
-//Move Row Info with Row
+/*TODO: swap set attribute with .className
+ *Create method for setting multiple attributes
+ *Prevent quill change when clicking edit on currently edited section - add secction # to all elements all the time
+ *Reduce map width when sticky
+ *Fix Delete Row*/
 
 
 var options = {
@@ -18,12 +19,8 @@ $(document).ready(function () {
     document.getElementById('googleMap1').style.position = "";
 })
 
-
-window.onscroll = function () { stickyHeader() };
-//PAGE FUNCTIONALITY FUNCTION
-
 //STICKY FEATURES
-
+window.onscroll = function () { stickyHeader() };
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function stickyHeader() {
     let map = document.getElementById("mapcontainer");
@@ -45,7 +42,7 @@ function stickyHeader() {
 
     }
 }
-
+//TODO: Iterative instead of randomIDs to ensure no duplication
 function RandomId(size) {
     var id = ""
     while (id.length < size) {
@@ -55,21 +52,13 @@ function RandomId(size) {
     console.log(id.length);
     return id;
 }
-function ChangeLightMode(elem) {
-    if (elem.dataset.value == "darkmode") {
-        
-        elem.dataset.value = "lightmode"
-        document.body.className = "darkmode"
-    }
-    else {
-        elem.dataset.value = "darkmode"
-        document.body.className = "lightmode"
-    }
-}
+
+
+
 
 
 //QUILL  and SECTION FUNCTIONALITY
-
+//TODO: Create Factory
 function addNewSection() {
 
     //Get text editor contents and destroy
@@ -104,7 +93,7 @@ function CreateRow(newSectionId) {
     let rowInfo = document.createElement("div");
     rowInfo.setAttribute("class", "row-info");
     rowInfo.id = ("rowinfo-" + newSectionId);
-    rowInfo.innerHTML = "Row Info";
+    rowInfo.innerHTML = "Click 'Map' Button and then on the map to set Coordinates";
 
     newTextColumn.appendChild(CreateQuillContainer());
     newTextColumn.appendChild(rowInfo);
@@ -147,7 +136,7 @@ function EditSection(sectionEditButton) {
     var sectionToEditId = sectionEditButton.id.replace("edit-", "");
     var editedSectionId = document.getElementById('quillcontainer').parentNode.id.replace("text-", "");
     
-    //Check to make sure you are trying to edite a seciton that is currently being edited
+    //Check to make sure you are trying to edit a section that is currently being edited
     if (sectionToEditId != editedSectionId) {
         //Get Quill contents and remove
         var quillContents = document.getElementsByClassName('ql-editor')[0].innerHTML;
@@ -176,10 +165,10 @@ function EditSection(sectionEditButton) {
     }
 }
 function DeleteSection(childbutton) {
-    var deleteConfirm = confirm("Are you sure you want to delete this seciton?");
+    var deleteConfirm = confirm("Are you sure you want to delete this section?");
     if (deleteConfirm == true) {
         var SectionId = childbutton.id.replace("delete-", "");
-        document.getElementById("row" + SectionId).remove();
+        document.getElementById("row-" + SectionId).remove();
     }
 }
 
@@ -220,6 +209,10 @@ function isElementOnScreen(element){
     return onScreen;
 }
 
+/**
+ * @description Changes from light theme to dark theme
+ * @param {Object} elem - Object holding and passing the current status of the page
+ */
 function ChangeLightMode(elem) {
     if (elem.dataset.value == "darkmode") {
         
