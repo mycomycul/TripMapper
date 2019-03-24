@@ -47,9 +47,7 @@ function RandomId(size) {
   var id = "";
   while (id.length < size) {
     id = id + Math.floor(Math.random() * 10).toString();
-    console.log(id);
   }
-  console.log(id.length);
   return id;
 }
 
@@ -126,25 +124,23 @@ function CreateRow(newSectionId) {
   NewRow.appendChild(newButtonColumn);
   return NewRow;
 }
+
+//Triggered by edit button. Detachs quill and reattaches to section to be edited
 function EditSection(sectionEditButton) {
-  var sectionToEditId = sectionEditButton.id.replace("edit-", "");
-  var editedSectionId = document
+  let sectionToEditId = sectionEditButton.id.replace("edit-", "");
+  let editedSectionId = document
     .getElementById("quillcontainer")
     .parentNode.id.replace("text-", "");
 
-  //Check to make sure you are trying to edit a section that is currently being edited
+  //Check to make sure you aren't trying to edit a section that is currently being edited
   if (sectionToEditId != editedSectionId) {
-    //Get Quill contents and remove
-    var quillContents = document.getElementsByClassName("ql-editor")[0]
-      .innerHTML;
-    var editedSection = document.getElementById("quillcontainer").parentNode;
-    editedSection.removeChild(editedSection.childNodes[0]);
-    editedSection.childNodes[0].insertAdjacentHTML(
-      "beforebegin",
-      quillContents
-    );
-    // editedSection.insertBefore(quillContents,editedSection.childNodes[0]);
-    //Prepare Quill Section
+    DetachQuill();
+    AttachQuill(sectionToEditId);
+  }
+}
+
+//Get section content, attach Quill and insert section content in Quill
+function AttachQuill(sectionToEditId){
     let sectionToEdit = document.getElementById("text-" + sectionToEditId);
     var rowData = sectionToEdit.lastChild;
     sectionToEdit.removeChild(sectionToEdit.lastChild);
@@ -157,12 +153,20 @@ function EditSection(sectionEditButton) {
 
     //Attach Quill
     let editor = new Quill("#QuillTarget", options);
-
-    // editor.setText(sectionToEditHtml);
     if (pasteOrNot == true) {
       editor.root.innerHTML = sectionToEditHtml;
     }
-  }
+}
+//Get Quill contents, remove quill and replace contents in section
+function DetachQuill(){
+    var quillContents = document.getElementsByClassName("ql-editor")[0]
+    .innerHTML;
+  var editedSection = document.getElementById("quillcontainer").parentNode;
+  editedSection.removeChild(editedSection.childNodes[0]);
+  editedSection.childNodes[0].insertAdjacentHTML(
+    "beforebegin",
+    quillContents
+  );
 }
 function DeleteSection(childbutton) {
   var deleteConfirm = confirm("Are you sure you want to delete this section?");
@@ -228,13 +232,20 @@ function ChangeLightMode(elem) {
 }
 
 function ExportScrollableCode() {
-  //Remove quill from all section
-  //Assemble text sections with ids
-  //Add Scrollable code
-  //download
-    let doc = "hello you";
+    //Get section currently being edited so Quill can be reattached
+    let editingSectionId = document
+    .getElementById("quillcontainer")
+    .parentNode.id.replace("text-", "");
+    DetachQuill();
+    //Build Document
+    let doc = "Future home of your content";
     let filename = "pageContent.html";
+    //TODO: Assemble text sections with ids. Grab each row, isolate text from section and attach data-location to section
+    //TODO: Add Scrollable code 
+
+    //Create file and download
     CreateFileToDownload(filename,doc)
+    AttachQuill(editingSectionId);
 }
 function CreateFileToDownload(filename,documentContents){
 
