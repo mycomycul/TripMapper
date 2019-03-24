@@ -5,11 +5,11 @@ This project was initially built for creating trip log websites where scrolling 
 * Sections can be added, edited, moved around, attached to map locations, and deleted. 
 * The map sticks to the top if you create enough sections that you can still see the map when creating large documents.
 * The dark\light theme icon is a custom built svg and transitions to a night time theme.
-* Exporting a new HTML file with code for autoscrolling has yet to be implemented.
+* Exporting a new HTML file with code for autoscrolling has yet to be implemented. THe button exports a new static document
 
 
 
-Because it's a static website, for security reason it doesn't implement an API key but the map stills work in developer mode. Eventually the map data will be fed through a server to secure the API connection
+Because it's a static website, for security reason it doesn't implement an API key but the map still works in developer mode. Eventually the map data will be fed through a server to secure the API connection
 
 
 To test the website you can view it live. If the interface loads with a map covering the entire background, refresh the page.
